@@ -1,0 +1,37 @@
+<fieldset class="search">
+    <table>
+        <tr>
+          <td>
+            <input type="text" placeholder="Search..." [(ngModel)]="searchText"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>
+              <input type="checkbox" value="Only show products in stock" [(ngModel)]="showOnlyInStock"/>
+              Only show products in stock
+            </label>            
+          </td>
+        </tr>
+      </table>
+</fieldset>
+<br>
+<fieldset class="productList">
+    <table>
+        <tr>
+         <th>Name</th>
+         <th>Price</th>
+        </tr>
+       <ng-container *ngFor="let cat of getCategories()">
+             <!-- Ng-repeat started here -->
+             <tr class="category">
+                    <td colspan="2">{{cat}}</td>
+             </tr>
+             <!-- Ng-repeat end -->
+             <tr class="items" *ngFor="let prod of getProductsInCategories(cat)">                
+                <td [ngStyle]="{'color': prod.stocked ? 'black' : 'red'}">{{prod.name}}</td>
+             <td>{{prod.price}}</td>
+             </tr>
+       </ng-container>
+       </table>
+</fieldset>
